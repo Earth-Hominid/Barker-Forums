@@ -5,9 +5,11 @@ const Subforum = require('../models/Subforum');
 const {
   GraphQLObjectType,
   GraphQLID,
+  GraphQLInt,
   GraphQLString,
   GraphQLSchema,
   GraphQLList,
+  GraphQLNonNull,
 } = require('graphql');
 
 // User Type
@@ -17,6 +19,11 @@ const UserType = new GraphQLObjectType({
     id: { type: GraphQLID },
     username: { type: GraphQLString },
     email: { type: GraphQLString },
+    friends: {type: GraphQLList},
+    createdSubforums: {type: GraphQLList},
+    createdComments: {type: GraphQLList},
+    savedPosts: {type: GraphQLList},
+    postVoteCount: {type: GraphQLInt},
   }),
 });
 
@@ -69,6 +76,21 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
+// Mutations
+const mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addUser: {
+      type: UserType,
+      args: { 
+        username: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString)},
+    },
+    resolve()
+  },
+});
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation,
 });
