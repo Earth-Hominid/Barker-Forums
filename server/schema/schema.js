@@ -1,85 +1,40 @@
-// Mongoose models
-const User = require('../models/User');
 const Subforum = require('../models/Subforum');
-const Post = require('../models/Post');
-const Comment = require('../models/Comment');
+const User = require('../models/User');
 
 const {
   GraphQLObjectType,
   GraphQLID,
-  GraphQLInt,
   GraphQLString,
   GraphQLSchema,
   GraphQLList,
   GraphQLNonNull,
+  GraphQLEnumType,
 } = require('graphql');
 
-// User Type
-const UserType = new GraphQLObjectType({
-  name: 'User',
-  fields: () => ({
-    id: { type: GraphQLID },
-    username: { type: GraphQLString },
-    email: { type: GraphQLString },
-    friends: { type: GraphQLList },
-    createdSubforums: { type: GraphQLList },
-    createdComments: { type: GraphQLList },
-    savedPosts: { type: GraphQLList },
-    postVoteCount: { type: GraphQLInt },
-  }),
-});
-
-// Subforum Type - userId will be UserType to create relationship
+// Subforum Type
 const SubforumType = new GraphQLObjectType({
   name: 'Subforum',
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
-    user: {
-      type: UserType,
-      resolve(parent, args) {
-        return users.findById(parent.userId);
-      },
-    },
-    name: { type: GraphQLString },
-    description: { type: GraphQLString },
     status: { type: GraphQLString },
-    posts: { type: GraphQLList },
-    votes: { type: GraphQLInt },
-  }),
-});
-
-// Post type
-const PostType = new GraphQLObjectType({
-  name: 'Post',
-  fields: () => ({
-    id: { type: GraphQLID },
-    content: { type: GraphQLString },
     user: {
       type: UserType,
       resolve(parent, args) {
-        return users.findById(parent.userId);
+        return User.findById(parent.userId);
       },
     },
-    votes: { type: GraphQLInt },
   }),
 });
 
-// Comment type
-const CommentType = new GraphQLObjectType({
-  name: 'Comment',
+// Client Type
+const UserType = new GraphQLObjectType({
+  name: 'User',
   fields: () => ({
     id: { type: GraphQLID },
-    content: { type: GraphQLString },
-    user: {
-      type: UserType,
-      resolve(parent, args) {
-        return users.findById(parent.userId);
-      },
-    },
-    votes: { type: GraphQLInt },
-    posts: { type: GraphQLList },
+    username: { type: GraphQLString },
+    email: { type: GraphQLString },
   }),
 });
 
@@ -89,12 +44,12 @@ const RootQuery = new GraphQLObjectType({
     subforums: {
       type: new GraphQLList(SubforumType),
       resolve(parent, args) {
-        return Subforum.find();
+        return SubforumType.find();
       },
     },
     subforum: {
       type: SubforumType,
-      args: { id: { type: GraphQLID } },
+      ars: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return Subforum.findById(args.id);
       },
@@ -119,6 +74,7 @@ const RootQuery = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
+    // Add user
     addUser: {
       type: UserType,
       args: {
@@ -126,11 +82,12 @@ const mutation = new GraphQLObjectType({
         email: { type: GraphQLNonNull(GraphQLString) },
       },
       resolve(parent, args) {
-        const user = new User({
+        const client = new Client({
           username: args.username,
           email: args.email,
         });
-        return user.save();
+
+        return client.save();
       },
     },
   },
