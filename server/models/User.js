@@ -13,8 +13,8 @@ const UserSchema = new mongoose.Schema({
   createdPosts: { type: Array },
   createdComments: { type: Array },
   savedPosts: { type: Array },
-  postVoteCount: { type: interger },
-  commentVoteCount: { type: interger },
+  postVoteCount: { type: Number },
+  commentVoteCount: { type: Number },
 });
 
 module.exports = mongoose.model('User', UserSchema);
