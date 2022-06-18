@@ -1,6 +1,8 @@
 // Mongoose models
 const User = require('../models/User');
 const Subforum = require('../models/Subforum');
+const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 
 const {
   GraphQLObjectType,
@@ -19,11 +21,11 @@ const UserType = new GraphQLObjectType({
     id: { type: GraphQLID },
     username: { type: GraphQLString },
     email: { type: GraphQLString },
-    friends: {type: GraphQLList},
-    createdSubforums: {type: GraphQLList},
-    createdComments: {type: GraphQLList},
-    savedPosts: {type: GraphQLList},
-    postVoteCount: {type: GraphQLInt},
+    friends: { type: GraphQLList },
+    createdSubforums: { type: GraphQLList },
+    createdComments: { type: GraphQLList },
+    savedPosts: { type: GraphQLList },
+    postVoteCount: { type: GraphQLInt },
   }),
 });
 
@@ -32,6 +34,8 @@ const SubforumType = new GraphQLObjectType({
   name: 'Subforum',
   fields: () => ({
     id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
     user: {
       type: UserType,
       resolve(parent, args) {
@@ -41,6 +45,41 @@ const SubforumType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
+    posts: { type: GraphQLList },
+    votes: { type: GraphQLInt },
+  }),
+});
+
+// Post type
+const PostType = new GraphQLObjectType({
+  name: 'Post',
+  fields: () => ({
+    id: { type: GraphQLID },
+    content: { type: GraphQLString },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return users.findById(parent.userId);
+      },
+    },
+    votes: { type: GraphQLInt },
+  }),
+});
+
+// Comment type
+const CommentType = new GraphQLObjectType({
+  name: 'Comment',
+  fields: () => ({
+    id: { type: GraphQLID },
+    content: { type: GraphQLString },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return users.findById(parent.userId);
+      },
+    },
+    votes: { type: GraphQLInt },
+    posts: { type: GraphQLList },
   }),
 });
 
@@ -82,11 +121,18 @@ const mutation = new GraphQLObjectType({
   fields: {
     addUser: {
       type: UserType,
-      args: { 
+      args: {
         username: { type: GraphQLNonNull(GraphQLString) },
-        email: { type: GraphQLNonNull(GraphQLString)},
+        email: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        const user = new User({
+          username: args.username,
+          email: args.email,
+        });
+        return user.save();
+      },
     },
-    resolve()
   },
 });
 
