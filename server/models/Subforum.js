@@ -15,6 +15,10 @@ const SubforumSchema = new mongoose.Schema({
     type: String,
     enum: ['Not started', 'In progress', 'Completed'],
   },
+  posts: {
+    type: Array,
+  },
+  members: { type: Array },
 });
 
 module.exports = mongoose.model('Subforum', SubforumSchema);
