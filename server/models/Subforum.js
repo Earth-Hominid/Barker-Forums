@@ -18,7 +18,7 @@ const SubforumSchema = new mongoose.Schema({
   posts: {
     type: Array,
   },
-  members: { type: Array },
+  members: { type: Number },
 });
 
 module.exports = mongoose.model('Subforum', SubforumSchema);
