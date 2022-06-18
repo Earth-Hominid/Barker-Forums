@@ -1,5 +1,7 @@
 const Subforum = require('../models/Subforum');
 const User = require('../models/User');
+const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 
 const {
   GraphQLObjectType,
@@ -19,10 +21,64 @@ const SubforumType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
+    members: { type: new GraphQLList(UserType) },
     user: {
       type: UserType,
       resolve(parent, args) {
         return User.findById(parent.userId);
+      },
+    },
+    posts: { type: new GraphQLList(PostType) },
+  }),
+});
+
+// Post Type
+const PostType = new GraphQLObjectType({
+  name: 'Post',
+  fields: () => ({
+    id: { type: GraphQLID },
+    content: { type: GraphQLString },
+    votes: { type: GraphQLEnumType },
+    comments: { type: GraphQLList(CommentType) },
+    subforum: {
+      type: SubforumType,
+      resolve(parent, args) {
+        return Subforum.findById(parent.subforumId);
+      },
+    },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
+  }),
+});
+
+// Comment Type
+const CommentType = new GraphQLObjectType({
+  name: 'Comment',
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    content: { type: GraphQLString },
+    votes: { type: GraphQLEnumType },
+    subforum: {
+      type: SubforumType,
+      resolve(parent, args) {
+        return Subforum.findById(parent.subforumId);
+      },
+    },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
+    post: {
+      type: PostType,
+      resolve(parent, args) {
+        return Post.findById(parent.postId);
       },
     },
   }),
@@ -44,7 +100,7 @@ const RootQuery = new GraphQLObjectType({
     subforums: {
       type: new GraphQLList(SubforumType),
       resolve(parent, args) {
-        return SubforumType.find();
+        return Subforum.find();
       },
     },
     subforum: {

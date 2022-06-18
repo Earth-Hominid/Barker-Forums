@@ -8,11 +8,16 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  postId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post',
+  },
+  subforumId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Subforum',
+  },
   votes: {
     type: Number,
-  },
-  posts: {
-    type: Array,
   },
 });
 
