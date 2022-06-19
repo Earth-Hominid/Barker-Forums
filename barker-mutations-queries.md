@@ -99,3 +99,38 @@ mutation {
   }
 }
 ```
+
+## Add a Post and return info:
+
+```
+mutation {
+  addPost(
+    title: "Give a dog a new bone",
+    content: "Rolling home",
+    votes: 10011,
+  	subforumId: "62af4b9f5b3a0993e1b2ab6b",
+  	userId: "62af3894170848495432d1eb",
+  ) {
+    title
+  	content
+    votes
+    comments {id}
+    subforumId {id}
+    userId {id}
+
+  }
+}
+```
+
+## Delete a post
+
+```
+mutation {
+  deletePost(
+   id: "62af7319731cf0e050eb0267"
+  ) {
+    id
+    title
+  }
+}
+```

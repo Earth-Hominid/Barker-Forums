@@ -12,6 +12,7 @@ const {
   GraphQLSchema,
   GraphQLList,
   GraphQLNonNull,
+  GraphQLInputObjectType,
 } = require('graphql');
 
 //Subforum Type
@@ -60,13 +61,13 @@ const PostType = new GraphQLObjectType({
     content: { type: GraphQLString },
     votes: { type: GraphQLInt },
     comments: { type: GraphQLList(CommentType) },
-    subforum: {
+    subforumId: {
       type: SubforumType,
       resolve(parent, args) {
         return Subforum.findById(parent.subforumId);
       },
     },
-    user: {
+    userId: {
       type: UserType,
       resolve(parent, args) {
         return User.findById(parent.userId);
@@ -82,19 +83,19 @@ const CommentType = new GraphQLObjectType({
     id: { type: GraphQLID },
     content: { type: GraphQLString },
     votes: { type: GraphQLInt },
-    subforum: {
+    subforumId: {
       type: SubforumType,
       resolve(parent, args) {
         return Subforum.findById(parent.subforumId);
       },
     },
-    user: {
+    userId: {
       type: UserType,
       resolve(parent, args) {
         return User.findById(parent.userId);
       },
     },
-    post: {
+    postId: {
       type: PostType,
       resolve(parent, args) {
         return Post.findById(parent.postId);
@@ -130,6 +131,32 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return User.findById(args.id);
+      },
+    },
+    posts: {
+      type: new GraphQLList(PostType),
+      resolve(parent, args) {
+        return Post.find();
+      },
+    },
+    post: {
+      type: PostType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Post.findById(args.id);
+      },
+    },
+    comments: {
+      type: new GraphQLList(CommentType),
+      resolve(parent, args) {
+        return Comment.find();
+      },
+    },
+    comment: {
+      type: CommentType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Comment.findById(args.id);
       },
     },
   },
@@ -198,6 +225,36 @@ const mutation = new GraphQLObjectType({
       args: { id: { type: GraphQLNonNull(GraphQLID) } },
       resolve(parent, args) {
         return Subforum.findByIdAndRemove(args.id);
+      },
+    },
+    // Add a post
+    addPost: {
+      type: PostType,
+      args: {
+        title: { type: GraphQLNonNull(GraphQLString) },
+        content: { type: GraphQLNonNull(GraphQLString) },
+        votes: { type: GraphQLInt },
+        comments: { type: GraphQLList(GraphQLString) },
+        subforumId: { type: GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const post = new Post({
+          title: args.title,
+          content: args.content,
+          votes: args.votes,
+          comments: args.comments,
+          subforumId: args.subforumId,
+          userId: args.userId,
+        });
+        return post.save();
+      },
+    },
+    deletePost: {
+      type: PostType,
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Post.findByIdAndRemove(args.id);
       },
     },
   },
