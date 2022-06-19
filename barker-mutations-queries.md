@@ -1,6 +1,8 @@
 # Barker | GraphQL | Mutations & Queries
 
-## Get all usernames
+## USERS
+
+### Get all usernames
 
 ```
 {
@@ -10,7 +12,7 @@
 }
 ```
 
-## Get single username and email
+### Get single username and email
 
 ```
 {
@@ -21,33 +23,7 @@
 }
 ```
 
-## Get name and status of all subforums
-
-```
-{
-  subforums {
-    name
-    status
-  }
-}
-```
-
-## Get a single subforum name, description along with the username and email
-
-```
-{
-  subforum(id: 1) {
-    name
-    description,
-    user {
-      username
-      email
-    }
-  }
-}
-```
-
-## Create new user and return all of their data
+### Create new user and return all of their data
 
 ```
 mutation {
@@ -78,29 +54,67 @@ mutation {
 }
 ```
 
-## Create a new subforum and return name and description
+## SUBFORUMS
+
+### Get all subforums, with name, id and creator's user name and email
+
+```
+{
+  subforums {
+		name
+    description
+    userId {
+      username
+    	email
+    }
+  }
+}
+```
+
+### Get a single subforum name, description along with the username and email of the creator.
+
+```
+{
+  subforum( id: "62af4b9f5b3a0993e1b2ab6b" ) {
+		name
+    description
+    userId {
+      username
+    	email
+    }
+  }
+}
+```
+
+### Create a new subforum and return name and description
 
 ```
 mutation {
-  addSubforum(name: "Mobile App", description: "This is the project description", status: "new", clientId: "1") {
+  addSubforum(name: "Nutrition", description: "This is a subforum description",  userId: "62af3894170848495432d1eb") {
    name
    description
   }
 }
 ```
 
-## Update a subforum status and return name and status
+### Update a subforum name and return name and return name & description
 
 ```
 mutation {
-  updateSubforum(status: "completed") {
+  updateSubforum(
+    id: "62af8e694bb40a68c7285c9a"
+    name: "Nutrition Update Has been updated",
+    description: "This is a subforum description"
+    userId: "62af3894170848495432d1eb") {
    name
-   status
+   description
   }
 }
 ```
 
-## Add a Post and return info:
+## POSTS
+
+### Add a Post and return info:
 
 ```
 mutation {
@@ -135,7 +149,9 @@ mutation {
 }
 ```
 
-## Add a new comment
+## COMMENTS
+
+### Add a new comment
 
 ```
 mutation {
@@ -156,7 +172,7 @@ mutation {
 }
 ```
 
-## Delete a comment
+### Delete a comment
 
 ```
 mutation {
