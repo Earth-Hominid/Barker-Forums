@@ -174,23 +174,31 @@ mutation {
 
 ## COMMENTS
 
-### Add a new comment
+### Add a new comment, return content, votes, postId, userId, subforumId, id
 
 ```
 mutation {
   addComment(
-    content: "Great advice!",
-    votes: 12,
-    userId: "62af3894170848495432d1eb",
-    subforumId: "62af4b9f5b3a0993e1b2ab6b",
-    postId: "62af725d731cf0e050eb0261",
-  ) {
-    id
-    content
-    userId {id}
-    subforumId {id}
-    postId {id}
-    votes
+    content: "This is a comment, posted on a post!"
+   	votes: 5
+    postId: "62af725d731cf0e050eb0261"
+    subforumId: "62af4b9f5b3a0993e1b2ab6b"
+    userId: "62af3f82cf0481d2547234c4"
+    ) {
+  id
+   content
+  	userId {
+      username
+      email
+    }
+    subforumId {
+      name
+      description
+    }
+    postId {
+      title
+      content
+    }
   }
 }
 ```
@@ -205,4 +213,31 @@ mutation {
     id
   }
 }
+```
+
+### Update a comment, return content, votes, postId, userId, subforumId, id
+
+```
+mutation {
+  updateComment(
+    id: "62afa5d6c175b2112c946c8f"
+    content: "This is a comment, posted on a post, which has been updated!"
+    ) {
+   id
+   content
+  	userId {
+      username
+      email
+    }
+    subforumId {
+      name
+      description
+    }
+    postId {
+      title
+      content
+    }
+  }
+}
+
 ```

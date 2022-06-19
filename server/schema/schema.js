@@ -332,6 +332,24 @@ const mutation = new GraphQLObjectType({
         return Comment.findByIdAndRemove(args.id);
       },
     },
+    updateComment: {
+      type: CommentType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        content: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Comment.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              content: args.content,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
   },
 });
 
