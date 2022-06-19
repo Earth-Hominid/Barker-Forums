@@ -136,7 +136,7 @@ mutation {
 }
 ```
 
-## Delete a post
+### Delete a post
 
 ```
 mutation {
@@ -147,6 +147,29 @@ mutation {
     title
   }
 }
+```
+
+### Update a post
+
+```
+mutation {
+  updatePost(
+    id: "62af728e731cf0e050eb0263"
+    title: "Updated Post",
+    content: "I have been updated content.") {
+   title
+   content
+  	userId {
+      username
+      email
+    }
+    subforumId {
+      name
+      description
+    }
+  }
+}
+
 ```
 
 ## COMMENTS

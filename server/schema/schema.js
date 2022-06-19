@@ -232,9 +232,8 @@ const mutation = new GraphQLObjectType({
       type: SubforumType,
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
-        name: { type: GraphQLNonNull(GraphQLString) },
+        name: { type: GraphQLString },
         description: { type: GraphQLString },
-        userId: { type: GraphQLNonNull(GraphQLID) },
         members: { type: GraphQLList(GraphQLString) },
         posts: { type: GraphQLList(GraphQLString) },
       },
@@ -245,7 +244,6 @@ const mutation = new GraphQLObjectType({
             $set: {
               name: args.name,
               description: args.description,
-              userId: args.userId,
               members: args.members,
               posts: args.posts,
             },
@@ -283,6 +281,26 @@ const mutation = new GraphQLObjectType({
       args: { id: { type: GraphQLNonNull(GraphQLID) } },
       resolve(parent, args) {
         return Post.findByIdAndRemove(args.id);
+      },
+    },
+    updatePost: {
+      type: PostType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        title: { type: GraphQLString },
+        content: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Post.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              title: args.title,
+              content: args.content,
+            },
+          },
+          { new: true }
+        );
       },
     },
     // Add a comment
