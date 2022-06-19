@@ -51,7 +51,7 @@
 
 ```
 mutation {
-  addUser(username: "Ironman", email: "ironman@gmail.com", {
+  addUser(username: "Ironman", email: "ironman@gmail.com"), {
     id
     username
     email
