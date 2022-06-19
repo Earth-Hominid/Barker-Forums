@@ -250,11 +250,41 @@ const mutation = new GraphQLObjectType({
         return post.save();
       },
     },
+    // Delete a post
     deletePost: {
       type: PostType,
       args: { id: { type: GraphQLNonNull(GraphQLID) } },
       resolve(parent, args) {
         return Post.findByIdAndRemove(args.id);
+      },
+    },
+    // Add a comment
+    addComment: {
+      type: CommentType,
+      args: {
+        content: { type: GraphQLNonNull(GraphQLString) },
+        votes: { type: GraphQLInt },
+        subforumId: { type: GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLNonNull(GraphQLID) },
+        postId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const comment = new Comment({
+          content: args.content,
+          votes: args.votes,
+          subforumId: args.subforumId,
+          userId: args.userId,
+          postId: args.postId,
+        });
+        return comment.save();
+      },
+    },
+    // Delete a comment
+    deleteComment: {
+      type: CommentType,
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Comment.findByIdAndRemove(args.id);
       },
     },
   },

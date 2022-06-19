@@ -134,3 +134,36 @@ mutation {
   }
 }
 ```
+
+## Add a new comment
+
+```
+mutation {
+  addComment(
+    content: "Great advice!",
+    votes: 12,
+    userId: "62af3894170848495432d1eb",
+    subforumId: "62af4b9f5b3a0993e1b2ab6b",
+    postId: "62af725d731cf0e050eb0261",
+  ) {
+    id
+    content
+    userId {id}
+    subforumId {id}
+    postId {id}
+    votes
+  }
+}
+```
+
+## Delete a comment
+
+```
+mutation {
+  deleteComment(
+   id: "62af7851a60285790d85146a"
+  ) {
+    id
+  }
+}
+```
