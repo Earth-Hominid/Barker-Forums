@@ -193,6 +193,13 @@ const mutation = new GraphQLObjectType({
         return subforum.save();
       },
     },
+    deleteSubforum: {
+      type: SubforumType,
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Subforum.findByIdAndRemove(args.id);
+      },
+    },
   },
 });
 
