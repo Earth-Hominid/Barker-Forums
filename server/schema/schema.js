@@ -199,6 +199,41 @@ const mutation = new GraphQLObjectType({
         return User.findByIdAndRemove(args.id);
       },
     },
+    // Update a user
+    updateUser: {
+      type: UserType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        username: { type: GraphQLString },
+        email: { type: GraphQLString },
+        friends: { type: GraphQLList(GraphQLString) },
+        createdSubforums: { type: GraphQLList(GraphQLString) },
+        memberSubforums: { type: GraphQLList(GraphQLString) },
+        createdPosts: { type: GraphQLList(GraphQLString) },
+        savedPosts: { type: GraphQLList(GraphQLString) },
+        createdComments: { type: GraphQLList(GraphQLString) },
+        savedComments: { type: GraphQLList(GraphQLString) },
+        postVoteCount: { type: GraphQLInt },
+        commentVoteCount: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return User.findByIdAndUpdate(args.id, {
+          $set: {
+            username: args.username,
+            email: args.email,
+            friends: args.friends,
+            createdSubforums: args.createdSubforums,
+            memberSubforums: args.memberSubforums,
+            createdPosts: args.createdPosts,
+            savedPosts: args.savedPosts,
+            createdComments: args.createdComments,
+            savedComments: args.savedComments,
+            postVoteCount: args.postVoteCount,
+            commentVoteCount: args.commentVoteCount,
+          },
+        });
+      },
+    },
     // Add a Subforum
     addSubforum: {
       type: SubforumType,
@@ -220,6 +255,7 @@ const mutation = new GraphQLObjectType({
         return subforum.save();
       },
     },
+    // Delete a Subforum
     deleteSubforum: {
       type: SubforumType,
       args: { id: { type: GraphQLNonNull(GraphQLID) } },
@@ -283,6 +319,7 @@ const mutation = new GraphQLObjectType({
         return Post.findByIdAndRemove(args.id);
       },
     },
+    // Update a post
     updatePost: {
       type: PostType,
       args: {
@@ -332,6 +369,7 @@ const mutation = new GraphQLObjectType({
         return Comment.findByIdAndRemove(args.id);
       },
     },
+    // Update a comment
     updateComment: {
       type: CommentType,
       args: {

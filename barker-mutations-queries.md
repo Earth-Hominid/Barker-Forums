@@ -44,7 +44,7 @@ mutation {
 }
 ```
 
-## Delete user and return id
+### Delete user and return id
 
 ```
 mutation {
@@ -52,6 +52,25 @@ mutation {
     id
   }
 }
+```
+
+### Update user and return username and email
+
+```
+mutation {
+  updateUser(
+  id: "62afa95b4dcc5b1efe5f181e"
+   username: "Flash"
+  email: "flash@gmail.com"
+    ) {
+  	username
+    email
+    }
+  }
+
+
+
+
 ```
 
 ## SUBFORUMS
