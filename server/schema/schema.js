@@ -115,7 +115,7 @@ const RootQuery = new GraphQLObjectType({
     },
     subforum: {
       type: SubforumType,
-      ars: { id: { type: GraphQLID } },
+      args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return Subforum.findById(args.id);
       },
@@ -225,6 +225,33 @@ const mutation = new GraphQLObjectType({
       args: { id: { type: GraphQLNonNull(GraphQLID) } },
       resolve(parent, args) {
         return Subforum.findByIdAndRemove(args.id);
+      },
+    },
+    // Update Subforum
+    updateSubforum: {
+      type: SubforumType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLString },
+        userId: { type: GraphQLNonNull(GraphQLID) },
+        members: { type: GraphQLList(GraphQLString) },
+        posts: { type: GraphQLList(GraphQLString) },
+      },
+      resolve(parent, args) {
+        return Subforum.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              name: args.name,
+              description: args.description,
+              userId: args.userId,
+              members: args.members,
+              posts: args.posts,
+            },
+          },
+          { new: true }
+        );
       },
     },
     // Add a post
