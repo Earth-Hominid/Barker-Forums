@@ -5,6 +5,7 @@ import HomePage from './HomePage';
 import LogInPage from './LogInPage';
 import NotFoundPage from './NotFoundPage';
 import SignUpPage from './SignUpPage';
+import UserPage from './UserPage';
 import WithNav from '../outlet/WithNav';
 
 const client = new ApolloClient({
@@ -21,6 +22,7 @@ const RouteSwitch = () => {
             <Route path="/barker" element={<HomePage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
             <Route path="/log-in" element={<LogInPage />} />
+            <Route path="/users" element={<UserPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
