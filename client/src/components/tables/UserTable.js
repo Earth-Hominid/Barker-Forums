@@ -19,6 +19,7 @@ const UserTable = ({ data }) => {
           <TableRow>
             <HeaderCell>Username</HeaderCell>
             <HeaderCell>Email</HeaderCell>
+            <HeaderCell>Delete Member</HeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
