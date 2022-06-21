@@ -8,9 +8,38 @@ import SignUpPage from './SignUpPage';
 import UserPage from './UserPage';
 import WithNav from '../outlet/WithNav';
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        users: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        subforums: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        posts: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        comments: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+  },
+});
+
 const client = new ApolloClient({
   uri: 'http://localhost:5000/graphql',
-  cache: new InMemoryCache(),
+  cache,
 });
 
 const RouteSwitch = () => {
