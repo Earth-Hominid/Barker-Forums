@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { ApolloProvider, InMemoryCache, ApolloClient } from '@apollo/client';
 import { SiteContent } from '../context/SiteContent';
 import HomePage from './HomePage';
 import LogInPage from './LogInPage';
@@ -7,24 +7,15 @@ import NotFoundPage from './NotFoundPage';
 import SignUpPage from './SignUpPage';
 import WithNav from '../outlet/WithNav';
 
+const client = new ApolloClient({
+  uri: 'http://localhost:5000/graphql',
+  cache: new InMemoryCache(),
+});
+
 const RouteSwitch = () => {
-  const [messageData, setMessageData] = useState([{}]);
-
-  useEffect(() => {
-    fetch('/chatroom')
-      .then((response) => response.json())
-      .then((data) => {
-        setMessageData(data);
-      });
-  }, []);
-
   return (
     <BrowserRouter>
-      <SiteContent.Provider
-        value={{
-          messageData,
-        }}
-      >
+      <ApolloProvider client={client}>
         <Routes>
           <Route element={<WithNav />}>
             <Route path="/barker" element={<HomePage />} />
@@ -33,7 +24,7 @@ const RouteSwitch = () => {
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
-      </SiteContent.Provider>
+      </ApolloProvider>
     </BrowserRouter>
   );
 };
