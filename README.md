@@ -4,6 +4,59 @@
 
 Barker is a social forum platform that hosts numerous forums with users from all over the world.
 
+### Interesting Problems
+
+When first implementing mutation delete functions in React, I received the following error: "Cache data may be lost when replacing the users field of a Query object."
+
+```js
+const client = new ApolloClient({
+  uri: 'http://localhost:5000/graphql',
+  cache: new InMemoryCache(),
+});
+```
+
+The cache above needed to be changed to:
+
+```js
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        users: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        subforums: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        posts: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        comments: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+  },
+});
+```
+
+And Client needed to be changed to:
+
+```js
+const client = new ApolloClient({
+  uri: 'http://localhost:5000/graphql',
+  cache,
+});
+```
+
 ## Dependencies
 
 - [Tailwind Styled Components](https://www.npmjs.com/package/tailwind-styled-components)
