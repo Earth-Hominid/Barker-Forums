@@ -5,6 +5,9 @@ import {
   TopNavigationWrap,
   HamburgerContainer,
   HamburgerButton,
+  NavButtonContainer,
+  NavLinkDark,
+  NavLinkLight,
 } from './Styles';
 
 const TopLevelNavigation = ({
@@ -17,12 +20,17 @@ const TopLevelNavigation = ({
         <a>
           <div
             aria-label="Barker Homepage"
-            className="cursor-pointer w-24 sm:w-28 md:w-32"
+            className="cursor-pointer w-24 sm:w-28 md:w-32 p-1"
           >
             <Image src={LightLogo} alt="barker logo" />
           </div>
         </a>
       </Link>
+
+      <NavButtonContainer>
+        <NavLinkLight href={'/login'}>Already a member?</NavLinkLight>
+        <NavLinkDark href={'/signup'}>Sign up</NavLinkDark>
+      </NavButtonContainer>
       <HamburgerContainer>
         <HamburgerButton
           onClick={handleNavigationToggleClick}

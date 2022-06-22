@@ -1,7 +1,7 @@
 import tw from 'tailwind-styled-components';
 
-export const TopNavigationWrap = tw.div`
-    h-16 
+export const TopNavigationWrap = tw.nav`
+    h-16
     whitespace-nowrap 
     w-full 
     flex 
@@ -10,6 +10,48 @@ export const TopNavigationWrap = tw.div`
     sticky 
     top-0 
     z-50
+`;
+
+export const NavButtonContainer = tw.div`
+    justify-end
+    w-full
+    hidden
+    md:flex
+`;
+
+export const NavLinkDark = tw.a`
+    rounded-3xl
+    px-2.5
+    py-1
+    mx-1
+    text-white
+    bg-sky-500
+    font-medium 
+    hover:bg-stone-300 
+    hover:text-stone-900
+    border-[1px]
+    border-sky-500
+    hover:border-[1px]
+    hover:border-stone-700
+    transition 
+    duration-150
+    ease-in-out
+`;
+
+export const NavLinkLight = tw.a`
+    rounded-3xl
+    px-2.5
+    py-1
+    mx-1
+    text-stone-700 
+    font-medium 
+    hover:bg-stone-300 
+    hover:text-stone-900
+    border-[1px]
+    border-stone-700
+    transition 
+    duration-150
+    ease-in-out
 `;
 
 export const HamburgerContainer = tw.div`
