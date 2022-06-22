@@ -1,4 +1,3 @@
-import React from 'react';
 import Talk from '../../../assets/icons/talkBubble.svg';
 import QuantityAdjuster from './quantity-adjuster/QuantityAdjuster';
 
