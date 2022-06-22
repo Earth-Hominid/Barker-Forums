@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { GET_USERS } from '../../queries/UserQueries';
+import { GET_USERS } from '../../queries/userQueries';
 import Spinner from '../../components/spinner/Spinner';
 import UserTable from '../tables/UserTable';
 
