@@ -80,7 +80,7 @@ mutation {
 ```
 {
   subforums {
-		name
+    name
     description
     userId {
       username
