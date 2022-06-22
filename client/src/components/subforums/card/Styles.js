@@ -1,7 +1,7 @@
 import tw from 'tailwind-styled-components';
 
 export const CardSection = tw.section`
- pt-4 mx-6 sm:mx-2
+ pt-4 mx-6 sm:mx-2 
 `;
 
 export const SectionHeader = tw.h2`
@@ -10,7 +10,7 @@ mb-1
 `;
 
 export const CardContainer = tw.div`
-sm:flex w-full mt-1 sm:justify-center
+sm:flex w-full mt-1 sm:justify-center 
 `;
 
 export const Card = tw.div`
@@ -28,11 +28,11 @@ rounded-sm
 cursor-pointer
 hover:border-stone-900
 hover:border-dotted
-hover:border-2"   
+hover:border-2   
 `;
 
 export const SmallTitle = tw.h2`
-ml-1 mt-1 text-[5%] lowercase
+ml-1 mt-1 text-[5%] lowercase font-bold
 `;
 
 export const LargeTitle = tw.h1`

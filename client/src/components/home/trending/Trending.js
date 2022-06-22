@@ -8,8 +8,10 @@ import Drop from '../../../assets/icons/drop.svg';
 const Trending = () => {
   return (
     <>
-      <div className="flex flex-col pt-4 mx-6 sm:mx-2">
-        <div className="text-xs mb-1">Trending Today</div>
+      <div className="flex flex-col pt-4 mx-6 sm:mx-2 lg:mx-20">
+        <div className="text-xs sm:text-base lg:text-lg mb-1">
+          Trending Today
+        </div>
 
         <div className="flex flex-wrap sm:flex-nowrap align-items justify-center">
           <div

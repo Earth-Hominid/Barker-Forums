@@ -19,7 +19,9 @@ const SubforumCard = ({ subforum }) => {
       <CardContainer>
         <Card>
           <div>
-            <SmallTitle>{`b/${subforum.name} ${subforum.userId.username}`}</SmallTitle>
+            <SmallTitle>
+              {`b/${subforum.name} ${subforum.userId.username}`}
+            </SmallTitle>
             <LargeTitle>{subforum.name}</LargeTitle>
             <ContentParagraph>{subforum.description}</ContentParagraph>
             <FooterContainer>
