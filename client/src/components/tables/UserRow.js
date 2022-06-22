@@ -1,7 +1,7 @@
 import { TableRow, DataCell } from './Styles';
 import { useMutation } from '@apollo/client';
 import { DELETE_USER } from '../../mutations/UserMutations';
-import { GET_USERS } from '../../queries/UserQueries';
+import { GET_USERS } from '../../queries/userQueries';
 
 const UserRow = ({ user }) => {
   const [deleteUser] = useMutation(DELETE_USER, {
