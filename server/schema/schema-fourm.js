@@ -3,6 +3,7 @@ const User = require('../models-fourm/User');
 const Subforum = require('../models-fourm/Subforum');
 const Post = require('../models-fourm/Post');
 const Comment = require('../models-fourm/Comment');
+const Vote = require('../models-fourm/Vote');
 
 const {
   GraphQLObjectType,
@@ -12,6 +13,7 @@ const {
   GraphQLSchema,
   GraphQLList,
   GraphQLNonNull,
+  GraphQLBoolean,
 } = require('graphql');
 
 // User Type
@@ -21,11 +23,15 @@ const UserType = new GraphQLObjectType({
     id: { type: GraphQLID },
     username: { type: GraphQLString },
     email: { type: GraphQLString },
-    // friends: { type: GraphQLList },
-    // createdSubforums: { type: GraphQLList },
-    // createdComments: { type: GraphQLList },
-    // savedPosts: { type: GraphQLList },
-    // postVoteCount: { type: GraphQLInt },
+    friends: { type: GraphQLList },
+    createdSubforums: { type: GraphQLList },
+    memberSubforums: { type: GraphQLList },
+    createdPosts: { type: GraphQLList },
+    savedPosts: { type: GraphQLList },
+    createdComments: { type: GraphQLList },
+    savedComments: { type: GraphQLList },
+    postVoteCount: { type: GraphQLInt },
+    commentVoteCount: { type: GraphQLInt },
   }),
 });
 
@@ -36,16 +42,14 @@ const SubforumType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
+    posts: { type: GraphQLList },
     user: {
       type: UserType,
       resolve(parent, args) {
         return users.findById(parent.userId);
       },
     },
-    description: { type: GraphQLString },
-    status: { type: GraphQLString },
-    // posts: { type: GraphQLList },
-    votes: { type: GraphQLInt },
+    members: { type: GraphQLList },
   }),
 });
 
@@ -54,7 +58,15 @@ const PostType = new GraphQLObjectType({
   name: 'Post',
   fields: () => ({
     id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    image: { type: GraphQLString },
     content: { type: GraphQLString },
+    subforum: {
+      type: SubforumType,
+      resolve(parent, args) {
+        return subforums.findById(parent.subforumId);
+      },
+    },
     user: {
       type: UserType,
       resolve(parent, args) {
@@ -78,8 +90,53 @@ const CommentType = new GraphQLObjectType({
         return users.findById(parent.userId);
       },
     },
+    subforum: {
+      type: SubforumType,
+      resolve(parent, args) {
+        return subforums.findById(parent.subforumId);
+      },
+    },
+    post: {
+      type: PostType,
+      resolve(parent, args) {
+        return posts.findById(parent.postId);
+      },
+    },
     votes: { type: GraphQLInt },
-    posts: { type: GraphQLList },
+  }),
+});
+
+// Vote schema
+const VoteType = new GraphQLObjectType({
+  name: 'Vote',
+  fields: () => ({
+    id: { type: GraphQLID },
+    upvote: { type: GraphQLBoolean },
+    downvote: { type: GraphQLBoolean },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return users.findById(parent.userId);
+      },
+    },
+    subforum: {
+      type: SubforumType,
+      resolve(parent, args) {
+        return subforums.findById(parent.subforumId);
+      },
+    },
+    post: {
+      type: PostType,
+      resolve(parent, args) {
+        return posts.findById(parent.postId);
+      },
+    },
+    comment: {
+      type: CommentType,
+      resolve(parent, args) {
+        return comments.findById(parent.commentId);
+      },
+    },
   }),
 });
 
@@ -99,7 +156,7 @@ const RootQuery = new GraphQLObjectType({
         return Subforum.findById(args.id);
       },
     },
-    post: {
+    posts: {
       type: new GraphQLList(PostType),
       resolve(parent, args) {
         return Post.find();
@@ -123,6 +180,19 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return User.findById(args.id);
+      },
+    },
+    votes: {
+      type: new GraphQLList(VoteType),
+      resolve(parent, args) {
+        return Vote.find();
+      },
+    },
+    vote: {
+      type: VoteType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Vote.findById(args.id);
       },
     },
   },

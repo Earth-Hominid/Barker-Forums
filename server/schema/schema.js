@@ -1,8 +1,9 @@
 // Mongoose Models
-const Subforum = require('../models/Subforum');
 const User = require('../models/User');
+const Subforum = require('../models/Subforum');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
+const Vote = require('../models/Vote');
 
 const {
   GraphQLObjectType,
@@ -12,26 +13,8 @@ const {
   GraphQLSchema,
   GraphQLList,
   GraphQLNonNull,
-  GraphQLInputObjectType,
+  GraphQLBoolean,
 } = require('graphql');
-
-//Subforum Type
-const SubforumType = new GraphQLObjectType({
-  name: 'Subforum',
-  fields: () => ({
-    id: { type: GraphQLID },
-    name: { type: GraphQLString },
-    description: { type: GraphQLString },
-    members: { type: new GraphQLList(UserType) },
-    userId: {
-      type: UserType,
-      resolve(parent, args) {
-        return User.findById(parent.userId);
-      },
-    },
-    posts: { type: new GraphQLList(PostType) },
-  }),
-});
 
 // User Type
 const UserType = new GraphQLObjectType({
@@ -52,12 +35,31 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
+//Subforum Type
+const SubforumType = new GraphQLObjectType({
+  name: 'Subforum',
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+    members: { type: new GraphQLList(UserType) },
+    userId: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
+    posts: { type: new GraphQLList(PostType) },
+  }),
+});
+
 // Post Type
 const PostType = new GraphQLObjectType({
   name: 'Post',
   fields: () => ({
     id: { type: GraphQLID },
     title: { type: GraphQLString },
+    image: { type: GraphQLString },
     content: { type: GraphQLString },
     votes: { type: GraphQLInt },
     comments: { type: GraphQLList(CommentType) },
@@ -99,6 +101,40 @@ const CommentType = new GraphQLObjectType({
       type: PostType,
       resolve(parent, args) {
         return Post.findById(parent.postId);
+      },
+    },
+  }),
+});
+
+// Vote schema
+const VoteType = new GraphQLObjectType({
+  name: 'Vote',
+  fields: () => ({
+    id: { type: GraphQLID },
+    upvote: { type: GraphQLBoolean },
+    downvote: { type: GraphQLBoolean },
+    userId: {
+      type: UserType,
+      resolve(parent, args) {
+        return users.findById(parent.userId);
+      },
+    },
+    subforumId: {
+      type: SubforumType,
+      resolve(parent, args) {
+        return subforums.findById(parent.subforumId);
+      },
+    },
+    postId: {
+      type: PostType,
+      resolve(parent, args) {
+        return posts.findById(parent.postId);
+      },
+    },
+    commentId: {
+      type: CommentType,
+      resolve(parent, args) {
+        return comments.findById(parent.commentId);
       },
     },
   }),
@@ -157,6 +193,19 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return Comment.findById(args.id);
+      },
+    },
+    votes: {
+      type: new GraphQLList(VoteType),
+      resolve(parent, args) {
+        return Vote.find();
+      },
+    },
+    vote: {
+      type: VoteType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Vote.findById(args.id);
       },
     },
   },
@@ -382,6 +431,58 @@ const mutation = new GraphQLObjectType({
           {
             $set: {
               content: args.content,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+    // Add a vote
+    addVote: {
+      type: VoteType,
+      args: {
+        upvote: { type: GraphQLBoolean },
+        downvote: { type: GraphQLBoolean },
+        subforumId: { type: GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLNonNull(GraphQLID) },
+        postId: { type: GraphQLNonNull(GraphQLID) },
+        commentId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const vote = new Vote({
+          upvote: args.upvote,
+          downvote: args.downvote,
+          subforumId: args.subforumId,
+          userId: args.userId,
+          postId: args.postId,
+          commentId: args.commentId,
+        });
+        return vote.save();
+      },
+    },
+    // Delete a vote
+    deleteVote: {
+      type: VoteType,
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Vote.findByIdAndRemove(args.id);
+      },
+    },
+    // Update a vote
+    updateVote: {
+      type: VoteType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        upvote: { type: GraphQLNonNull(GraphQLBoolean) },
+        downvote: { type: GraphQLNonNull(GraphQLBoolean) },
+      },
+      resolve(parent, args) {
+        return Vote.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              upvote: args.upvote,
+              downvote: args.downvote,
             },
           },
           { new: true }

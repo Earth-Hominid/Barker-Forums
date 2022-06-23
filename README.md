@@ -4,6 +4,10 @@
 
 Barker is a social forum platform that hosts numerous forums with users from all over the world.
 
+### Technology Choices
+
+GraphQL used which prevents bog down issues (bandwidth, slower loadtimes, etc) caused by over fetching from the REST API.
+
 ### Interesting Problems
 
 When first implementing mutation delete functions in React, I received the following error: "Cache data may be lost when replacing the users field of a Query object."
