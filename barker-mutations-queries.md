@@ -260,3 +260,53 @@ mutation {
 }
 
 ```
+
+## VOTES
+
+### Add vote
+
+```
+mutation {
+  addVote(
+    upvote: true
+    downvote: false
+    postId: "62af725d731cf0e050eb0261"
+    subforumId: "62af4b9f5b3a0993e1b2ab6b"
+    userId: "62af3f82cf0481d2547234c4"
+    commentId: "62b495a4ee40621415439d3a"
+  ) {
+    id
+  }
+}
+```
+
+### Delete vote
+
+```
+mutation {
+  deleteVote(
+    id: "62b49613ee40621415439d41"
+
+  ) {
+    id
+
+  }
+}
+```
+
+### Update vote
+
+```
+mutation {
+  updateVote(
+    id: "62b49613ee40621415439d41"
+    upvote: false
+    downvote: true
+
+  ) {
+    id
+    upvote
+    downvote
+  }
+}
+```
