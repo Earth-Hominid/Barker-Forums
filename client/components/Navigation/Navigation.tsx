@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { signIn, useSession, signOut } from 'next-auth/react';
 import {
   BeakerIcon,
   HomeIcon,
@@ -24,8 +25,11 @@ import {
   ButtonLink,
   SignUpButtonLink,
 } from './Styles';
+import { signal } from 'nodemon/lib/config/defaults';
 
 const Navigation = () => {
+  const { data: session } = useSession();
+
   return (
     <>
       <HeaderContainer>
@@ -50,8 +54,22 @@ const Navigation = () => {
             <UserIcon className="icon" />
           </ButtonContainer>
 
-          <ButtonLink>Already a member?</ButtonLink>
-          <SignUpButtonLink>Sign up</SignUpButtonLink>
+          {session ? (
+            <>
+              <ButtonLink onClick={signOut}>
+                <div className="text-xs flex-1">
+                  <p className="truncate">{session?.user?.name}</p>
+                  <p className="text-gray-400">1 Karma</p>
+                </div>
+              </ButtonLink>
+            </>
+          ) : (
+            <>
+              <ButtonLink onClick={signIn}>Already a member?</ButtonLink>
+              <SignUpButtonLink>Sign up</SignUpButtonLink>
+            </>
+          )}
+
           <HamburgerContainer>
             <MenuIcon className="icon" />
           </HamburgerContainer>

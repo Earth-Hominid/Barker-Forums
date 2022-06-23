@@ -85,7 +85,6 @@ export const ButtonLink = tw.a`
   py-1 
   rounded-lg
   cursor-pointer
-  hover:border-2
   hover:border-stone-300
   duration-300
   transition
