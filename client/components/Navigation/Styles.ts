@@ -76,6 +76,24 @@ export const SignUpButtonLink = tw.a`
   ease-in-out
 `;
 
+export const LogoutButtonLink = tw.a`
+  hidden md:inline-flex
+  border-2
+  text-white
+  bg-rose-500
+  border-rose-500
+  px-3
+  py-1
+  rounded-3xl
+  cursor-pointer
+  hover:text-rose-600
+  hover:bg-sky-50
+  hover:border-2
+  transition
+  duration-300
+  ease-in-out
+`;
+
 export const ButtonLink = tw.a`
   text-stone-700
   hover:text-indigo-600
@@ -103,7 +121,7 @@ export const OrangeIconWrap = tw.div`
   md:p-1 
   md:hover:bg-orange-100
   md:hover:text-orange-600
-  rounded-md 
+  rounded-3xl
   text-stone-600
   duration-150
   transition
@@ -133,7 +151,7 @@ export const BlueIconWrap = tw.div`
   md:p-1 
   md:hover:bg-blue-100
   md:hover:text-blue-600
-  rounded-md 
+  rounded-3xl 
   text-stone-600
   duration-150
   transition

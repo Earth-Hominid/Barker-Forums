@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
-import { GET_SUBFORUMS } from '../../../queries/subforumQueries';
-import Spinner from '../../../components/spinner/Spinner';
+import { GET_SUBFORUMS } from '../../queries/subforumQueries';
+import Spinner from '../spinner/Spinner';
 
 const Subforums = () => {
   const { loading, error, data } = useQuery(GET_SUBFORUMS);
