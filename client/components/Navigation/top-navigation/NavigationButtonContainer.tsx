@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { signIn, useSession, signOut } from 'next-auth/react';
 import {
+  XIcon,
   UserIcon,
   FireIcon,
   ChatIcon,
@@ -18,23 +19,13 @@ import {
   BlueIconWrap,
   SkyIconWrap,
   LogoutButtonLink,
-} from '../Styles';
+} from './Styles';
 
-const NavigationButtonContainer = () => {
-  const [toggleNavigation, setToggleNavigation] = useState(false);
+const NavigationButtonContainer = ({
+  handleNavigationMenuClick,
+  navigationMenuToggle,
+}) => {
   const { data: session } = useSession();
-
-  const toggleNavigationButton = () => {
-    if (toggleNavigation) {
-      setToggleNavigation(false);
-    } else {
-      setToggleNavigation(true);
-    }
-  };
-
-  const handleNavigationToggleClick = () => {
-    toggleNavigationButton();
-  };
 
   return (
     <>
@@ -69,7 +60,11 @@ const NavigationButtonContainer = () => {
         )}
 
         <HamburgerContainer>
-          <MenuIcon className="icon" />
+          {navigationMenuToggle ? (
+            <XIcon className="icon" onClick={handleNavigationMenuClick} />
+          ) : (
+            <MenuIcon className="icon" onClick={handleNavigationMenuClick} />
+          )}
         </HamburgerContainer>
       </ExtendedContainer>
     </>

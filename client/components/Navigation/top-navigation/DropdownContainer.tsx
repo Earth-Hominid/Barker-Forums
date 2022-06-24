@@ -1,5 +1,5 @@
 import { HomeIcon, ChevronDownIcon } from '@heroicons/react/solid';
-import { HomeContainer, HomeText } from '../Styles';
+import { HomeContainer, HomeText } from './Styles';
 
 const DropdownContainer = () => {
   return (

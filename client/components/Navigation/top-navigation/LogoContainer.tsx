@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const LightLogo = require('../../../public/logo-light.png');
 
-import { ImageContainer } from '../Styles';
+import { ImageContainer } from './Styles';
 
 const LogoContainer = () => {
   return (

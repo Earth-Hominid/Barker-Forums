@@ -1,17 +1,33 @@
-import LogoContainer from './top-navigation/LogoContainer';
-import DropdownContainer from './top-navigation/DropdownContainer';
-import NavigationButtonContainer from './top-navigation/NavigationButtonContainer';
-
-import { HeaderContainer } from './Styles';
+import { useState } from 'react';
+import TopNavigation from './top-navigation/TopNavigation';
+import BottomNavigation from './bottom-navigation/BottomNavigation';
 
 const Navigation = () => {
+  const [navigationMenuToggle, setNavigationMenuToggle] = useState(false);
+
+  const toggleNavigationButton = () => {
+    if (navigationMenuToggle) {
+      setNavigationMenuToggle(false);
+    } else {
+      setNavigationMenuToggle(true);
+    }
+  };
+
+  const handleNavigationMenuClick = () => {
+    toggleNavigationButton();
+  };
+
   return (
     <>
-      <HeaderContainer>
-        <LogoContainer />
-        <DropdownContainer />
-        <NavigationButtonContainer />
-      </HeaderContainer>
+      <TopNavigation
+        handleNavigationMenuClick={handleNavigationMenuClick}
+        navigationMenuToggle={navigationMenuToggle}
+      />
+      {navigationMenuToggle ? (
+        <BottomNavigation navigationMenuToggle={navigationMenuToggle} />
+      ) : (
+        ''
+      )}
     </>
   );
 };
