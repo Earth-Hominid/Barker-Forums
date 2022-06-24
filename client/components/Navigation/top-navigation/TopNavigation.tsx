@@ -4,7 +4,13 @@ import NavigationButtonContainer from './NavigationButtonContainer';
 
 import { HeaderContainer } from './Styles';
 
-const Navigation = ({ handleNavigationMenuClick, navigationMenuToggle }) => {
+const Navigation = ({
+  handleNavigationMenuClick,
+  navigationMenuToggle,
+  signOut,
+  signIn,
+  session,
+}) => {
   return (
     <>
       <HeaderContainer>
@@ -13,6 +19,9 @@ const Navigation = ({ handleNavigationMenuClick, navigationMenuToggle }) => {
         <NavigationButtonContainer
           handleNavigationMenuClick={handleNavigationMenuClick}
           navigationMenuToggle={navigationMenuToggle}
+          signOut={signOut}
+          signIn={signIn}
+          session={session}
         />
       </HeaderContainer>
     </>

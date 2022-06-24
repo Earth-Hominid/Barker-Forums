@@ -47,7 +47,6 @@ export const ExtendedContainer = tw.div`
   space-x-4
   justify-end
   mr-2
-
 `;
 
 export const ButtonContainer = tw.div`
@@ -58,7 +57,7 @@ export const HamburgerContainer = tw.div`
  md:hidden
 `;
 
-export const SignUpButtonLink = tw.a`
+export const SignUpButtonLink = tw.button`
   hidden md:inline-flex
   border-2
   text-white
@@ -76,7 +75,7 @@ export const SignUpButtonLink = tw.a`
   ease-in-out
 `;
 
-export const LogoutButtonLink = tw.a`
+export const LogoutButtonLink = tw.button`
   hidden md:inline-flex
   border-2
   text-white
@@ -87,14 +86,14 @@ export const LogoutButtonLink = tw.a`
   rounded-3xl
   cursor-pointer
   hover:text-rose-600
-  hover:bg-sky-50
+  hover:bg-rose-50
   hover:border-2
   transition
   duration-300
   ease-in-out
 `;
 
-export const ButtonLink = tw.a`
+export const ButtonLink = tw.button`
   text-stone-700
   hover:text-indigo-600
   hidden 

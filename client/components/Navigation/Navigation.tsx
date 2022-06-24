@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { signIn, useSession, signOut } from 'next-auth/react';
 import TopNavigation from './top-navigation/TopNavigation';
 import BottomNavigation from './bottom-navigation/BottomNavigation';
 
 const Navigation = () => {
   const [navigationMenuToggle, setNavigationMenuToggle] = useState(false);
+
+  const { data: session } = useSession();
 
   const toggleNavigationButton = () => {
     if (navigationMenuToggle) {
@@ -22,8 +25,15 @@ const Navigation = () => {
       <TopNavigation
         handleNavigationMenuClick={handleNavigationMenuClick}
         navigationMenuToggle={navigationMenuToggle}
+        signOut={signOut}
+        signIn={signIn}
+        session={session}
       />
-      {navigationMenuToggle ? <BottomNavigation /> : ''}
+      {navigationMenuToggle ? (
+        <BottomNavigation session={session} signOut={signOut} signIn={signIn} />
+      ) : (
+        ''
+      )}
     </>
   );
 };

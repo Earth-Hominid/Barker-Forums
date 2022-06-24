@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { signIn, useSession, signOut } from 'next-auth/react';
+import Link from 'next/link';
+
 import {
   XIcon,
   UserIcon,
@@ -24,9 +24,10 @@ import {
 const NavigationButtonContainer = ({
   handleNavigationMenuClick,
   navigationMenuToggle,
+  signOut,
+  session,
+  signIn,
 }) => {
-  const { data: session } = useSession();
-
   return (
     <>
       <ExtendedContainer>
@@ -46,10 +47,14 @@ const NavigationButtonContainer = ({
           <>
             <LogoutButtonLink onClick={signOut}>Logout</LogoutButtonLink>
             <ButtonLink onClick={signOut}>
-              <div className="text-xs flex-1">
-                <p className="truncate">{session?.user?.name}</p>
-                <p className="text-gray-400">is awesome!</p>
-              </div>
+              <Link href="/dashboard">
+                <div className="text-xs flex-1">
+                  <a>
+                    <p className="truncate">{session?.user?.name}</p>
+                    <p className="text-gray-400">is awesome!</p>
+                  </a>
+                </div>
+              </Link>
             </ButtonLink>
           </>
         ) : (

@@ -4,13 +4,16 @@ import MenuAccordian from './MenuAccordian';
 
 import {
   BottomNavigationMenu,
-  ThemeSwitcher,
+  ActionButtonHolder,
   ThemeButton,
   IconWrap,
   NavigationMenu,
+  LogoutButtonLink,
+  ButtonLink,
+  SignUpButtonLink,
 } from './Styles';
 
-const BottomNavigation = () => {
+const BottomNavigation = ({ signIn, signOut, session }) => {
   const [lightTheme, setLightTheme] = useState(true);
 
   const handleLightThemeToggle = () => {
@@ -26,14 +29,24 @@ const BottomNavigation = () => {
 
   return (
     <BottomNavigationMenu>
-      <ThemeSwitcher>
+      <ActionButtonHolder>
         <ThemeButton>
           <IconWrap>
             <SunIcon />
           </IconWrap>
           Theme
         </ThemeButton>
-      </ThemeSwitcher>
+        {session ? (
+          <>
+            <LogoutButtonLink onClick={signOut}>Logout</LogoutButtonLink>
+          </>
+        ) : (
+          <>
+            <ButtonLink>Demo Account</ButtonLink>
+            <SignUpButtonLink onClick={signIn}>Sign in</SignUpButtonLink>
+          </>
+        )}
+      </ActionButtonHolder>
       <NavigationMenu></NavigationMenu>
     </BottomNavigationMenu>
   );
