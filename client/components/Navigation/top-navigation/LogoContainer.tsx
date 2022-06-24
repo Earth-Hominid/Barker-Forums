@@ -8,20 +8,19 @@ import { ImageContainer } from './Styles';
 const LogoContainer = () => {
   return (
     <>
-      <ImageContainer>
-        <Link href={'/'}>
-          <a>
-            <div aria-label="Barker Homepage" className="ml-2">
-              <Image
-                src={LightLogo}
-                alt="barker logo"
-                layout="fill"
-                objectFit="contain"
-              />
-            </div>
-          </a>
-        </Link>
-      </ImageContainer>
+      <Link href={'/'}>
+        <a>
+          <ImageContainer>
+            <Image
+              src={LightLogo}
+              alt="barker logo"
+              layout="fill"
+              objectFit="contain"
+              priority={true}
+            />
+          </ImageContainer>
+        </a>
+      </Link>
     </>
   );
 };

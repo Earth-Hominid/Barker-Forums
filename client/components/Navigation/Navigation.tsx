@@ -23,11 +23,7 @@ const Navigation = () => {
         handleNavigationMenuClick={handleNavigationMenuClick}
         navigationMenuToggle={navigationMenuToggle}
       />
-      {navigationMenuToggle ? (
-        <BottomNavigation navigationMenuToggle={navigationMenuToggle} />
-      ) : (
-        ''
-      )}
+      {navigationMenuToggle ? <BottomNavigation /> : ''}
     </>
   );
 };
