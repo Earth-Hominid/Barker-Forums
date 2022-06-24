@@ -17,6 +17,10 @@ export const ActionButtonHolder = tw.div`
   p-2
 `;
 
+export const NavigationMenu = tw.div`
+
+`;
+
 export const ThemeButton = tw.button`
   flex 
   items-center
@@ -41,9 +45,6 @@ export const IconWrap = tw.div`
   h-5
   w-5 
   mr-1
-`;
-
-export const NavigationMenu = tw.div`
 `;
 
 export const ButtonLink = tw.button`

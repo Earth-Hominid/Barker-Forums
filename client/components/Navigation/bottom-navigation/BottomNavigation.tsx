@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { SunIcon, MoonIcon } from '@heroicons/react/outline';
-import MenuAccordian from './MenuAccordian';
-
+import MenuAccordian from './accordian/MenuAccordian';
 import {
   BottomNavigationMenu,
   ActionButtonHolder,
@@ -27,6 +26,28 @@ const BottomNavigation = ({ signIn, signOut, session }) => {
     handleLightThemeToggle();
   };
 
+  const subforumObject = {
+    title: 'All howls',
+    datapoints: [
+      { name: 'Nutrition', id: '1', url: 'subforum/nutrition' },
+      { name: 'World News', id: '2', url: 'subforum/worldnews' },
+      { name: 'Finance', id: '3', url: 'subforum/finance' },
+    ],
+  };
+
+  const popularSubforumObject = {
+    title: 'Popular howls',
+    datapoints: [
+      {
+        name: 'Programming',
+        id: '1',
+        url: 'subforum/programming',
+      },
+      { name: 'CS Careers', id: '1', url: 'subforum/cscareers' },
+      { name: 'Programmer Humor', id: '1', url: 'subforum/programmerhumor' },
+    ],
+  };
+
   return (
     <BottomNavigationMenu>
       <ActionButtonHolder>
@@ -47,7 +68,10 @@ const BottomNavigation = ({ signIn, signOut, session }) => {
           </>
         )}
       </ActionButtonHolder>
-      <NavigationMenu></NavigationMenu>
+      <NavigationMenu>
+        <MenuAccordian props={popularSubforumObject} />
+        <MenuAccordian props={subforumObject} />
+      </NavigationMenu>
     </BottomNavigationMenu>
   );
 };
