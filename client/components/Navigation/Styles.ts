@@ -69,7 +69,7 @@ export const SignUpButtonLink = tw.a`
   rounded-3xl
   cursor-pointer
   hover:text-sky-600
-  hover:bg-white
+  hover:bg-sky-50
   hover:border-2
   transition
   duration-300
@@ -78,15 +78,79 @@ export const SignUpButtonLink = tw.a`
 
 export const ButtonLink = tw.a`
   text-stone-700
+  hover:text-indigo-600
   hidden 
   md:inline-flex 
-  hover:bg-stone-300 
+  hover:bg-indigo-50 
   px-2 
   py-1 
   rounded-lg
   cursor-pointer
-  hover:border-stone-300
+  hover:border-indigo-600
+  border-transparent
+  border-2
+  hover:border-2
   duration-300
+  transition
+  ease-in-out
+`;
+
+export const OrangeIconWrap = tw.div`
+  h-9 
+  w-6 
+  md:w-9 
+  cursor-pointer 
+  md:p-1 
+  md:hover:bg-orange-100
+  md:hover:text-orange-600
+  rounded-md 
+  text-stone-600
+  duration-150
+  transition
+  ease-in-out
+`;
+
+export const CyanIconWrap = tw.div`
+  h-9 
+  w-6 
+  md:w-9 
+  cursor-pointer 
+  md:p-1 
+  md:hover:bg-cyan-100
+  md:hover:text-cyan-700
+  rounded-md 
+  text-stone-600
+  duration-150
+  transition
+  ease-in-out
+`;
+
+export const BlueIconWrap = tw.div`
+  h-9 
+  w-6 
+  md:w-9 
+  cursor-pointer 
+  md:p-1 
+  md:hover:bg-blue-100
+  md:hover:text-blue-600
+  rounded-md 
+  text-stone-600
+  duration-150
+  transition
+  ease-in-out
+`;
+
+export const SkyIconWrap = tw.div`
+  h-9 
+  w-6 
+  md:w-9 
+  cursor-pointer 
+  md:p-1 
+  md:hover:bg-sky-100
+  md:hover:text-sky-600
+  rounded-md 
+  text-stone-600
+  duration-150
   transition
   ease-in-out
 `;

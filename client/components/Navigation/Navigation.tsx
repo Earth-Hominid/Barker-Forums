@@ -1,19 +1,17 @@
 import Image from 'next/image';
+import { useState } from 'react';
 import { signIn, useSession, signOut } from 'next-auth/react';
-import {
-  BeakerIcon,
-  HomeIcon,
-  ChevronDownIcon,
-  LibraryIcon,
-} from '@heroicons/react/solid';
+import { BeakerIcon, HomeIcon, ChevronDownIcon } from '@heroicons/react/solid';
 import {
   UserIcon,
   FireIcon,
   ChatIcon,
   MenuIcon,
+  LibraryIcon,
 } from '@heroicons/react/outline';
 
 const LightLogo = require('../../public/logo-light.png');
+
 import {
   HeaderContainer,
   ImageContainer,
@@ -24,10 +22,15 @@ import {
   ExtendedContainer,
   ButtonLink,
   SignUpButtonLink,
+  OrangeIconWrap,
+  BlueIconWrap,
+  CyanIconWrap,
+  SkyIconWrap,
 } from './Styles';
 import { signal } from 'nodemon/lib/config/defaults';
 
 const Navigation = () => {
+  const [isShown, setIsShown] = useState(false);
   const { data: session } = useSession();
 
   return (
@@ -48,10 +51,15 @@ const Navigation = () => {
         </HomeContainer>
         <ExtendedContainer>
           <ButtonContainer>
-            <FireIcon className="icon" />
-            <ChatIcon className="icon" />
-            <LibraryIcon className="icon" />
-            <UserIcon className="icon" />
+            <OrangeIconWrap>
+              <FireIcon />
+            </OrangeIconWrap>
+            <BlueIconWrap>
+              <ChatIcon />
+            </BlueIconWrap>
+            <SkyIconWrap>
+              <LibraryIcon />
+            </SkyIconWrap>
           </ButtonContainer>
 
           {session ? (

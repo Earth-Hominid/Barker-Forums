@@ -4,6 +4,10 @@
 
 Barker is a social forum platform that hosts numerous forums with users from all over the world.
 
+### Features
+
+Authentication, JWT, BCRYPT, Reddit, Google, Github
+
 ### Technology Choices
 
 GraphQL used which prevents bog down issues (bandwidth, slower loadtimes, etc) caused by over fetching from the REST API.
