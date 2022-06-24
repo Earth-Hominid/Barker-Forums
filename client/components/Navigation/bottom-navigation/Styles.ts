@@ -22,10 +22,14 @@ export const ThemeButton = tw.button`
   items-center
   text-sm 
   font-semibold 
-  text-stone-600 
+  text-stone-700 
+  border-transparent
+  border-2
   py-1 
   px-2 
   hover:bg-stone-100 
+  hover:border-2
+  hover:border-stone-700
   cursor-pointer
   rounded-md
   duration-150
@@ -48,7 +52,7 @@ export const ButtonLink = tw.button`
   hover:bg-indigo-50 
   px-2 
   py-1 
-  rounded-lg
+  rounded-3xl
   cursor-pointer
   hover:border-indigo-600
   border-transparent
@@ -64,7 +68,7 @@ export const SignUpButtonLink = tw.button`
   text-white
   bg-sky-500
   border-sky-500
-  px-3
+  px-4
   py-1
   rounded-3xl
   cursor-pointer
