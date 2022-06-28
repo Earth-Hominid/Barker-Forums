@@ -5,7 +5,7 @@ import HomePage from '../components/home-page/HomePage';
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Barker | Howl at the moon. </title>
         <meta
@@ -15,7 +15,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomePage />
-    </div>
+    </>
   );
 };
 

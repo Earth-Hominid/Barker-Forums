@@ -17,7 +17,7 @@ export const PostInput = tw.input`
   bg-stone-50
   p-2
   pl-5
-  outline-none 
+  outline-none
 `;
 
 export const IconHolder = tw.div`
@@ -41,4 +41,22 @@ export const SecondaryInput = tw.input`
   p-2 
   outline-none 
   text-stone-700
+`;
+
+export const ButtonHolder = tw.div`
+  flex items-center justify-center m-2
+`;
+
+export const PrimaryButton = tw.button`
+text-white
+  font-bold
+  w-full 
+  sm:w-96 
+  rounded-full 
+  bg-blue-400 
+  p-2 
+  text-xl
+  sm:text-2xl
+  lg:text-3xl
+  font-[Rubik]
 `;

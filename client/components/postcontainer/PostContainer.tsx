@@ -10,6 +10,8 @@ import {
   IconHolder,
   SecondaryInput,
   ContentHolder,
+  ButtonHolder,
+  PrimaryButton,
 } from './Styles';
 
 type FormData = {
@@ -90,6 +92,27 @@ const PostContainer = () => {
                   placeholder="Optional..."
                 />
               </div>
+            )}
+
+            {/* Errors */}
+
+            {Object.keys(errors).length > 0 && (
+              <div>
+                {errors.postTitle?.type === 'required' && (
+                  <p>You bark needs a title.</p>
+                )}
+                {errors.postContent?.type === 'required' && (
+                  <p>You bark needs some content.</p>
+                )}
+              </div>
+            )}
+
+            {!!watch('postTitle') && (
+              <ButtonHolder>
+                <PrimaryButton type="submit" className="">
+                  bark!
+                </PrimaryButton>
+              </ButtonHolder>
             )}
           </ContentHolder>
         )}
