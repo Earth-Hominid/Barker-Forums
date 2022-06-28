@@ -68,3 +68,6 @@ const client = new ApolloClient({
 ## Dependencies
 
 - [Tailwind Styled Components](https://www.npmjs.com/package/tailwind-styled-components)
+- [NextAuth.js](https://next-auth.js.org/) used for authentication purposes.
+- [React Hook Form](https://react-hook-form.com/)
+- [Dicebear Avatars](https://avatars.dicebear.com/) used to generate the avatars.
