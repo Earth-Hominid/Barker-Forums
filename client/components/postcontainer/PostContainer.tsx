@@ -34,9 +34,13 @@ const PostContainer = () => {
     formState: { errors },
   } = useForm<FormData>();
 
+  const onSubmit = handleSubmit(async (FormData) => {
+    console.log(FormData);
+  });
+
   return (
     <TopSection>
-      <form>
+      <form onSubmit={onSubmit}>
         <PostHolder>
           <Avatar />
 

@@ -1,7 +1,8 @@
 import tw from 'tailwind-styled-components';
 
 export const TopSection = tw.section`
-md:m-10 lg:mx-20 bg-stone-300 rounded-md p-2`;
+ bg-stone-300 
+ rounded-md p-2`;
 
 export const PostHolder = tw.div`
  flex items-center space-x-3
@@ -44,7 +45,10 @@ export const SecondaryInput = tw.input`
 `;
 
 export const ButtonHolder = tw.div`
-  flex items-center justify-center m-2
+  flex 
+  items-center 
+  justify-center 
+  m-2
 `;
 
 export const PrimaryButton = tw.button`
@@ -57,6 +61,5 @@ text-white
   p-2 
   text-xl
   sm:text-2xl
-  lg:text-3xl
   font-[Rubik]
 `;
