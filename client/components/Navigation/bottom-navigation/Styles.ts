@@ -142,3 +142,24 @@ export const SkyIconWrap = tw.div`
   transition
   ease-in-out
 `;
+
+export const CreateSubforumButton = tw.button`
+flex
+flex-row
+items-center
+  border-2
+  text-white
+  bg-blue-500
+  border-blue-500
+  px-3
+  py-1
+  rounded-3xl
+  cursor-pointer
+  hover:text-blue-600
+  hover:bg-blue-50
+  hover:border-2
+  transition
+  duration-300
+  ease-in-out
+  
+`;

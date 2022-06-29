@@ -1,15 +1,25 @@
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        clients: {
+        users: {
           merge(existing, incoming) {
             return incoming;
           },
         },
-        projects: {
+        subforums: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        posts: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        comments: {
           merge(existing, incoming) {
             return incoming;
           },

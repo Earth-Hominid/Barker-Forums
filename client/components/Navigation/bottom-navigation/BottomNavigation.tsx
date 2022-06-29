@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { SunIcon, MoonIcon } from '@heroicons/react/outline';
+import Link from 'next/link';
+import { SunIcon, MoonIcon, PlusCircleIcon } from '@heroicons/react/outline';
 import MenuAccordian from './accordian/MenuAccordian';
 import {
   BottomNavigationMenu,
@@ -10,6 +11,7 @@ import {
   LogoutButtonLink,
   ButtonLink,
   SignUpButtonLink,
+  CreateSubforumButton,
 } from './Styles';
 
 const BottomNavigation = ({ signIn, signOut, session }) => {
@@ -22,6 +24,7 @@ const BottomNavigation = ({ signIn, signOut, session }) => {
       setLightTheme(true);
     }
   };
+
   const handleThemeButtonClick = () => {
     handleLightThemeToggle();
   };
@@ -66,6 +69,20 @@ const BottomNavigation = ({ signIn, signOut, session }) => {
             <ButtonLink>Demo Account</ButtonLink>
             <SignUpButtonLink onClick={signIn}>Sign in</SignUpButtonLink>
           </>
+        )}
+        {session ? (
+          <>
+            <Link href="/create/sub-barker">
+              <CreateSubforumButton>
+                <IconWrap>
+                  <PlusCircleIcon />
+                </IconWrap>
+                Howl
+              </CreateSubforumButton>
+            </Link>
+          </>
+        ) : (
+          <></>
         )}
       </ActionButtonHolder>
       <NavigationMenu>

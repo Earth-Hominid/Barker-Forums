@@ -79,7 +79,7 @@ const PostContainer = () => {
               />
             </div>
             <div className="flex items-center px-2">
-              <p className="min-w-[90px]">sub-barker:</p>
+              <label className="min-w-[90px]">sub-barker:</label>
 
               <SecondaryInput
                 {...register('subforum')}
@@ -89,7 +89,7 @@ const PostContainer = () => {
             </div>
             {imageInputOpen && (
               <div className="flex items-center px-2">
-                <p className="min-w-[90px]"> image url:</p>
+                <label className="min-w-[90px]"> image url:</label>
                 <SecondaryInput
                   {...register('postImage')}
                   type="text"
@@ -106,7 +106,7 @@ const PostContainer = () => {
                   <p>You bark needs a title.</p>
                 )}
                 {errors.postContent?.type === 'required' && (
-                  <p>You bark needs some content.</p>
+                  <p className="text-rose-600">You bark needs some content.</p>
                 )}
               </div>
             )}
