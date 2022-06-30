@@ -171,3 +171,32 @@ export const SkyIconWrap = tw.div`
   transition
   ease-in-out
 `;
+
+export const IndigoIconWrap = tw.div`
+  h-9 
+  w-6 
+  md:w-9 
+  cursor-pointer 
+  md:p-1 
+  md:hover:bg-indigo-100
+  md:hover:text-indigo-600
+  rounded-3xl 
+  text-stone-600
+  duration-150
+  transition
+  ease-in-out
+`;
+export const GreenIconWrap = tw.div`
+  h-9 
+  w-6 
+  md:w-9 
+  cursor-pointer 
+  md:p-1 
+  md:hover:bg-green-100
+  md:hover:text-green-600
+  rounded-3xl 
+  text-stone-600
+  duration-150
+  transition
+  ease-in-out
+`;

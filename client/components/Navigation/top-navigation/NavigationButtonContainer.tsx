@@ -2,11 +2,11 @@ import Link from 'next/link';
 
 import {
   XIcon,
-  UserIcon,
   FireIcon,
+  AnnotationIcon,
   ChatIcon,
   MenuIcon,
-  LibraryIcon,
+  UsersIcon,
 } from '@heroicons/react/outline';
 
 import {
@@ -18,6 +18,8 @@ import {
   OrangeIconWrap,
   BlueIconWrap,
   SkyIconWrap,
+  GreenIconWrap,
+  IndigoIconWrap,
   LogoutButtonLink,
 } from './Styles';
 
@@ -34,13 +36,22 @@ const NavigationButtonContainer = ({
         <ButtonContainer>
           <OrangeIconWrap>
             <FireIcon />
-          </OrangeIconWrap>
-          <BlueIconWrap>
-            <ChatIcon />
-          </BlueIconWrap>
-          <SkyIconWrap>
-            <LibraryIcon />
-          </SkyIconWrap>
+          </OrangeIconWrap>{' '}
+          <Link href="/create/sub-barker">
+            <BlueIconWrap>
+              <AnnotationIcon />
+            </BlueIconWrap>
+          </Link>
+          <Link href="/">
+            <IndigoIconWrap>
+              <ChatIcon />
+            </IndigoIconWrap>
+          </Link>
+          <Link href="/users">
+            <SkyIconWrap>
+              <UsersIcon />
+            </SkyIconWrap>
+          </Link>
         </ButtonContainer>
 
         {session ? (

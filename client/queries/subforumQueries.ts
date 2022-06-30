@@ -12,4 +12,8 @@ const GET_SUBFORUMS = gql`
   }
 `;
 
+const GET_PARTICULAR_SUBFORUM = gql`
+  query getSubforum
+`;
+
 export { GET_SUBFORUMS };

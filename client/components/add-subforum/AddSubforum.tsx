@@ -1,19 +1,28 @@
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useMutation, useQuery } from '@apollo/client';
 import { useForm } from 'react-hook-form';
+import { ADD_SUBFORUM } from '../../mutations/SubforumMutations';
+
 import {
   TopSection,
   ModalContainer,
   ContentHolder,
   SubforumInput,
+  SecondaryInput,
+  PageTitle,
+  ButtonHolder,
+  PrimaryButton,
 } from './Styles';
 
 type FormData = {
   subforumName: string;
+  subforumDescription: string;
 };
 
 const AddSubforum = () => {
   const { data: session } = useSession();
+  const [AddSubforum] = useMutation(ADD_SUBFORUM);
 
   const {
     register,
@@ -29,6 +38,9 @@ const AddSubforum = () => {
 
   return (
     <TopSection>
+      <PageTitle>
+        Create a Howl! <i className="text-base">(sub-forum)</i>
+      </PageTitle>
       <form onSubmit={onSubmit}>
         <ModalContainer>
           <SubforumInput
@@ -36,13 +48,36 @@ const AddSubforum = () => {
             disabled={!session}
             type="text"
             placeholder={
-              session
-                ? 'Howl at the moon!'
-                : 'Want to howl? You need to sign in first!'
+              session ? 'Title' : 'Want to howl? You need to sign in first!'
             }
           />
-          <ContentHolder></ContentHolder>
         </ModalContainer>
+        {!!watch('subforumName') && (
+          <ContentHolder>
+            <div className="flex items-center px-2">
+              <SecondaryInput
+                {...register('subforumDescription', { required: true })}
+                type="text"
+                placeholder="Description (optional)"
+              />
+            </div>
+            {Object.keys(errors).length > 0 && (
+              <div>
+                {errors.subforumName?.type === 'required' && (
+                  <p>Your howl needs a name.</p>
+                )}
+              </div>
+            )}
+
+            {!!watch('subforumName') && (
+              <ButtonHolder>
+                <PrimaryButton type="submit" className="">
+                  howl at the moon!
+                </PrimaryButton>
+              </ButtonHolder>
+            )}
+          </ContentHolder>
+        )}
       </form>
     </TopSection>
   );

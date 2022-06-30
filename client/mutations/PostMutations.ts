@@ -4,20 +4,21 @@ const ADD_POST = gql`
   mutation AddPost(
     $title: String!
     $content: String!
+    $image: String!
     $userId: ID!
     $subforumId: ID!
-    $votes: String!
   ) {
     addPost(
       title: $title
       content: $content
+      image: $image
       userId: $userId
       subforumId: $subforumId
-      votes: "1"
     ) {
       id
       title
       content
+      created_at
       votes
       subforum {
         id

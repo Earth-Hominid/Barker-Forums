@@ -155,11 +155,30 @@ items-center
   py-1
   rounded-3xl
   cursor-pointer
-  hover:text-blue-600
+  hover:text-blue-500
   hover:bg-blue-50
   hover:border-2
   transition
   duration-300
   ease-in-out
-  
+`;
+
+export const CreatePostButton = tw.button`
+flex
+flex-row
+items-center
+  border-2
+  text-white
+  bg-indigo-400
+  border-indigo-400
+  px-3
+  py-1
+  rounded-3xl
+  cursor-pointer
+  hover:text-indigo-500
+  hover:bg-indigo-50
+  hover:border-2
+  transition
+  duration-300
+  ease-in-out
 `;

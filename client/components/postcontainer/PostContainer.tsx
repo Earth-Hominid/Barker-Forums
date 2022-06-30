@@ -103,10 +103,10 @@ const PostContainer = () => {
             {Object.keys(errors).length > 0 && (
               <div>
                 {errors.postTitle?.type === 'required' && (
-                  <p>You bark needs a title.</p>
+                  <p>Your bark needs a title.</p>
                 )}
                 {errors.postContent?.type === 'required' && (
-                  <p className="text-rose-600">You bark needs some content.</p>
+                  <p className="text-rose-600">Your bark needs some content.</p>
                 )}
               </div>
             )}

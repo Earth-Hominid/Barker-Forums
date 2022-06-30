@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { SunIcon, MoonIcon, PlusCircleIcon } from '@heroicons/react/outline';
+import {
+  SunIcon,
+  MoonIcon,
+  PlusCircleIcon,
+  ChatIcon,
+  AnnotationIcon,
+} from '@heroicons/react/outline';
 import MenuAccordian from './accordian/MenuAccordian';
 import {
   BottomNavigationMenu,
@@ -12,6 +18,7 @@ import {
   ButtonLink,
   SignUpButtonLink,
   CreateSubforumButton,
+  CreatePostButton,
 } from './Styles';
 
 const BottomNavigation = ({ signIn, signOut, session }) => {
@@ -75,10 +82,18 @@ const BottomNavigation = ({ signIn, signOut, session }) => {
             <Link href="/create/sub-barker">
               <CreateSubforumButton>
                 <IconWrap>
-                  <PlusCircleIcon />
+                  <AnnotationIcon />
                 </IconWrap>
                 Howl
               </CreateSubforumButton>
+            </Link>
+            <Link href="/">
+              <CreatePostButton>
+                <IconWrap>
+                  <ChatIcon />
+                </IconWrap>
+                Bark
+              </CreatePostButton>
             </Link>
           </>
         ) : (
