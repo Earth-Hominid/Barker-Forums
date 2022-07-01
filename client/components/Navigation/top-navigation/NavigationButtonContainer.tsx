@@ -7,6 +7,7 @@ import {
   ChatIcon,
   MenuIcon,
   UsersIcon,
+  LibraryIcon,
 } from '@heroicons/react/outline';
 
 import {
@@ -21,6 +22,7 @@ import {
   GreenIconWrap,
   IndigoIconWrap,
   LogoutButtonLink,
+  CyanIconWrap,
 } from './Styles';
 
 const NavigationButtonContainer = ({
@@ -36,7 +38,7 @@ const NavigationButtonContainer = ({
         <ButtonContainer>
           <OrangeIconWrap>
             <FireIcon />
-          </OrangeIconWrap>{' '}
+          </OrangeIconWrap>
           <Link href="/create/howl">
             <BlueIconWrap>
               <AnnotationIcon />
@@ -47,17 +49,22 @@ const NavigationButtonContainer = ({
               <ChatIcon />
             </IndigoIconWrap>
           </Link>
-          <Link href="/users">
+          <Link href="/subforums">
             <SkyIconWrap>
-              <UsersIcon />
+              <LibraryIcon />
             </SkyIconWrap>
+          </Link>
+          <Link href="/users">
+            <CyanIconWrap>
+              <UsersIcon />
+            </CyanIconWrap>
           </Link>
         </ButtonContainer>
 
         {session ? (
           <>
             <LogoutButtonLink onClick={signOut}>Logout</LogoutButtonLink>
-            <ButtonLink onClick={signOut}>
+            <ButtonLink>
               <Link href="/dashboard">
                 <div className="text-xs flex-1">
                   <a>

@@ -118,7 +118,7 @@ export const CyanIconWrap = tw.div`
   md:p-1 
   md:hover:bg-cyan-100
   md:hover:text-cyan-700
-  rounded-md 
+  rounded-3xl 
   text-stone-600
   duration-150
   transition
@@ -148,7 +148,7 @@ export const SkyIconWrap = tw.div`
   md:p-1 
   md:hover:bg-sky-100
   md:hover:text-sky-600
-  rounded-md 
+  rounded-3xl 
   text-stone-600
   duration-150
   transition
