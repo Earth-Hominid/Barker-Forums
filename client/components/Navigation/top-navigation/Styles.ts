@@ -21,23 +21,6 @@ export const ImageContainer = tw.div`
     cursor-pointer
 `;
 
-export const HomeContainer = tw.div`
-  flex 
-  flex-row 
-  items-center 
-  mx-6
-  lg:min-w-[150px]
-  xl:min-w-[200px]
-`;
-
-export const HomeText = tw.p`
-  flex-1
-  hidden
-  ml-2
-  lg:inline
-  text-stone-600
-`;
-
 export const ExtendedContainer = tw.div`
   flex 
   items-center 

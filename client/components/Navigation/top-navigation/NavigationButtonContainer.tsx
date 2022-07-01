@@ -37,7 +37,7 @@ const NavigationButtonContainer = ({
           <OrangeIconWrap>
             <FireIcon />
           </OrangeIconWrap>{' '}
-          <Link href="/create/sub-barker">
+          <Link href="/create/howl">
             <BlueIconWrap>
               <AnnotationIcon />
             </BlueIconWrap>

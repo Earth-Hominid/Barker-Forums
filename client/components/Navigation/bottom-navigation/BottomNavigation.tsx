@@ -79,7 +79,7 @@ const BottomNavigation = ({ signIn, signOut, session }) => {
         )}
         {session ? (
           <>
-            <Link href="/create/sub-barker">
+            <Link href="/create/howl">
               <CreateSubforumButton>
                 <IconWrap>
                   <AnnotationIcon />

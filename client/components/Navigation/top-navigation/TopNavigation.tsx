@@ -1,5 +1,5 @@
 import LogoContainer from './LogoContainer';
-import DropdownContainer from './DropdownContainer';
+import DropdownContainer from './drop-down/DropdownContainer';
 import NavigationButtonContainer from './NavigationButtonContainer';
 
 import { HeaderContainer } from './Styles';
