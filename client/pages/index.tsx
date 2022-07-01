@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import HomePage from '../components/home-page/HomePage';
+import HomePage from '../components/completed-pages/HomePage';
 
 const Home: NextPage = () => {
   return (
