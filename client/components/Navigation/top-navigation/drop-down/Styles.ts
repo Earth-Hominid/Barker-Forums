@@ -71,9 +71,6 @@ export const ButtonHolder = tw.div`
   py-1
 `;
 
-export const MenuList = tw.ul`
-`;
-
 export const MenuItem = tw.li`
   text-stone-500
   hover:bg-stone-300
@@ -82,3 +79,13 @@ export const MenuItem = tw.li`
   rounded-md
   p-1
 `;
+
+export const LoadingText = tw.p`
+text-stone-400
+font-semibold
+text-xs`;
+
+export const ErrorText = tw.p`
+text-rose-500
+font-semibold
+text-xs`;

@@ -1,17 +1,10 @@
 import Link from 'next/link';
-
 import { PlusIcon } from '@heroicons/react/solid';
+import MenuList from './MenuList';
 
-import {
-  MenuContainer,
-  MenuList,
-  MenuItem,
-  MenuHeader,
-  ButtonHolder,
-  IconHolder,
-} from './Styles';
+import { MenuContainer, MenuHeader, ButtonHolder, IconHolder } from './Styles';
 
-const DropDownMenu = () => {
+const DropdownMenu = () => {
   return (
     <MenuContainer>
       <MenuHeader>Howling Communities</MenuHeader>
@@ -23,12 +16,9 @@ const DropDownMenu = () => {
           <p className="ml-1">Create a Community</p>
         </ButtonHolder>
       </Link>
-
-      <MenuList>
-        <MenuItem>b/ Dog Nutrition</MenuItem>
-      </MenuList>
+      <MenuList />
     </MenuContainer>
   );
 };
 
-export default DropDownMenu;
+export default DropdownMenu;
