@@ -65,6 +65,42 @@ const client = new ApolloClient({
 });
 ```
 
+### Dropdown Menu functionality with useRef Hook.
+
+The drop down menu needs to close when the user clicks outside of the component. I was able to implement this functionality, however, when clicking within the drop down menu on a link, it would also close the drop down menu.
+
+Furthermore, a TypeScript error "property 'current' does not exist on type 'HTMLElement" was occuring. I located a solution on Stack Overflow and used their suggested toggle function:
+
+```js
+const dropdownRef = useRef < HTMLElement > null;
+const [openMenu, setOpenMenu] = useState(false);
+
+const open = () => setOpenMenu(true);
+const close = () => setOpenMenu(false);
+
+const handleMenuClick = () => {
+  if (openMenu) {
+    close();
+  } else {
+    open();
+  }
+};
+
+useEffect(() => {
+  document.addEventListener('mousedown', toggle);
+  return () => {
+    document.removeEventListener('mousedown', toggle);
+  };
+}, []);
+
+const toggle = (e: MouseEvent) => {
+  const { current } = dropdownRef;
+  if (current && !current.contains(e.target)) {
+    setOpenMenu(false);
+  }
+};
+```
+
 ## Dependencies
 
 - [Tailwind Styled Components](https://www.npmjs.com/package/tailwind-styled-components)
